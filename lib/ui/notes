@@ -1,0 +1,156 @@
+  Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0))),
+            height: MediaQuery.of(context).size.height * 0.5,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.12,
+                      ),
+                      SvgPicture.asset(
+                        Assets.clockSvg,
+                        width: 40,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.03,
+                      ),
+                      Text(
+                        "Arriving in 20 mins.",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 27),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.85,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: HexColor("#E0E3FB")),
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 0,
+                              blurRadius: 4,
+                              offset: Offset(0, 4),
+                              color: Colors.black.withOpacity(0.25)),
+                        ],
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Status:",
+                                style: TextStyle(
+                                    fontSize: 20, color: HexColor("#959595")),
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Picked Up , Now in Transit",
+                                style: TextStyle(
+                                    fontSize: 20, color: HexColor("#2094E9")),
+                              )),
+                        ),
+                      ],
+                    )),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.07,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        Assets.photo,
+                        scale: 0.8,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.02,
+                      ),
+                      Column(
+                        children: [
+                          Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: Text(
+                                "Oladapo Micheal",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 21),
+                              )),
+                          SizedBox(
+                            height:
+                                MediaQuery.of(context).size.height * 0.007,
+                          ),
+                          Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: Text(
+                                "081123478521",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 17),
+                              )),
+                          SizedBox(
+                            height:
+                                MediaQuery.of(context).size.height * 0.007,
+                          ),
+                          Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: Text(
+                                "Azote Logistics",
+                                style: TextStyle(
+                                    fontSize: 16, color: HexColor("#4A5CE2")),
+                              )),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            Assets.phoneSvg,
+                            width: 30,
+                            height: 30,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.04,
+                          ),
+                          Image.asset(
+                            Assets.comment,
+                            scale: 0.8,
+                            color: Colors.blue,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      "View Package Summary",
+                      style:
+                          TextStyle(fontSize: 21, color: HexColor("#2094E9")),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
