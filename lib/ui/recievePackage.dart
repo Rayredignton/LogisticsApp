@@ -8,6 +8,7 @@ import 'package:logistics/core/services/googleMapsServices.dart';
 import 'package:logistics/ui/deliveryType.dart';
 import 'package:logistics/utilities/assets.dart';
 import 'package:provider/provider.dart';
+import 'package:logistics/core/models/placePredictions.dart';
 
 class ReceivePackage extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class ReceivePackage extends StatefulWidget {
 class _ReceivePackageState extends State<ReceivePackage> {
   TextEditingController pickUpTextController = TextEditingController();
   TextEditingController dropOffTextController = TextEditingController();
+  List<PlacePredictions> placePredictionList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -139,6 +141,25 @@ class _ReceivePackageState extends State<ReceivePackage> {
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: HexColor("#C5C5C5")))))),
+                    (placePredictionList.length > 0)
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            child: ListView.separated(
+                                itemBuilder: (context, index) {
+                                  return PredictionTile(
+                                    placePredictions:
+                                        placePredictionList[index],
+                                  );
+                                },
+                                separatorBuilder: (BuildContext context, int index) => Divider(),
+                                shrinkWrap: true,
+                                itemCount: placePredictionList.length,
+                                physics: ClampingScrollPhysics(),
+                                
+                                ),
+                          )
+                        : Container(),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.04,
                     ),
@@ -216,7 +237,7 @@ class _ReceivePackageState extends State<ReceivePackage> {
                         Container(
                           width: MediaQuery.of(context).size.width * 0.72,
                           child: Text(
-                            "Receive bul packages , Add multiple adresses",
+                            "Receive bulk packages , Add multiple adresses",
                             style: TextStyle(color: HexColor("#2945FF")),
                           ),
                         ),
@@ -303,19 +324,77 @@ class _ReceivePackageState extends State<ReceivePackage> {
       ),
     );
   }
+
+  void findPlace(String placeName) async {
+    if (placeName.length > 1) {
+      String autoCompleteUrl =
+          "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$placeName&key=$mapKey&sessiontoken=1234567890&components=country:ng";
+
+      var res = await GoogleMapsServices.getRequest(autoCompleteUrl);
+
+      if (res == 'failed') {
+        return;
+      }
+      if (res["status"] == "Ok") {
+        var predictions = res["predictions"];
+
+        var placesList = (predictions as List)
+            .map((e) => PlacePredictions.fromJson(e))
+            .toList();
+
+        setState(() {
+          placePredictionList = placesList;
+        });
+      }
+    }
+  }
 }
 
-void findPlace(String placeName) async {
-  if (placeName.length > 1) {
-    String autoCompleteUrl =
-        "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$placeName&key=$mapKey&sessiontoken=1234567890&components=country:ng";
-
-    var res = await GoogleMapsServices.getRequest(autoCompleteUrl);
-
-    if (res == 'failed') {
-      return;
-    }
-    print("Places Predictions Response");
-    print(res);
+class PredictionTile extends StatelessWidget {
+  final PlacePredictions placePredictions;
+  PredictionTile({
+    this.placePredictions,
+    Key key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Column(
+      children: [
+        SizedBox(
+          width: 10,
+        ),
+        Row(
+          children: [
+            Icon(Icons.add_location),
+            SizedBox(
+              width: 15,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    placePredictions.main_text,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    placePredictions.secondary_text,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
+      ],
+    ));
   }
 }

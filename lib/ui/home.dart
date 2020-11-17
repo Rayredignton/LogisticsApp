@@ -3,8 +3,11 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:logistics/core/services/methods.dart';
+import 'package:logistics/ui/EditAccountUi.dart';
+import 'package:logistics/ui/HistoryPage.dart';
 import 'package:logistics/ui/selectRidePage.dart';
 import 'package:logistics/ui/selectRideSend.dart';
+import 'package:logistics/ui/walletPage.dart';
 import 'package:logistics/utilities/assets.dart';
 import 'dart:async';
 
@@ -58,15 +61,22 @@ class _HomeState extends State<Home> {
                 ),
                 Row(
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      height: 90,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.grey[700],
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 60,
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditAccount(),
+                          )),
+                                          child: Container(
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        height: 90,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey[700],
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.white,
+                            size: 60,
+                          ),
                         ),
                       ),
                     ),
@@ -93,7 +103,11 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>HistoryPage(),
+                          )),
                     child: Row(
                       children: [
                         Image.asset(Assets.history),
@@ -115,7 +129,11 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: InkWell(
-                    onTap: () {},
+                    onTap:() => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WalletPage(),
+                          )),
                     child: Row(
                       children: [
                         Image.asset(Assets.wallet),

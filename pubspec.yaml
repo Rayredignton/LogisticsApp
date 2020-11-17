@@ -57,6 +57,7 @@ flutter:
     - assets/svg/clock.svg
     - assets/images/clock.png
     - assets/images/wallet.png
+    - assets/images/button.png
     #   - images/a_dot_ham.jpeg
     # An image asset can refer to one or more resolution-specific "variants", see
     # https://flutter.dev/assets-and-images/#resolution-aware.

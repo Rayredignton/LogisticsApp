@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:logistics/ui/PackageTrack.dart';
 import 'package:logistics/utilities/assets.dart';
-
+import 'package:logistics/ui/packageInformation.dart';
 class OrderConfirmation extends StatefulWidget {
   @override
   _OrderConfirmationState createState() => _OrderConfirmationState();
@@ -75,7 +75,7 @@ class _OrderConfirmationState extends State<OrderConfirmation> {
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => OrderConfirmation(),
+                          builder: (context) => PackageInformation(),
                         )),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
