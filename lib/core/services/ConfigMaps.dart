@@ -1,1 +1,1 @@
-String mapKey = "AIzaSyDT_TEzYYAl9uOq1g0hB1MpKknWtLJQaq4";
+String mapKey = "Api key";
